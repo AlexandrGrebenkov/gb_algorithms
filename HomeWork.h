@@ -1,7 +1,3 @@
-//
-// Created by alexa on 02.07.2019.
-//
-
 #ifndef LESSON1_HOMEWORK_H
 #define LESSON1_HOMEWORK_H
 
