@@ -1,5 +1,8 @@
 #ifndef GB_ALGORITHMS_LESSON2_H
 #define GB_ALGORITHMS_LESSON2_H
+
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -17,7 +20,6 @@ extern "C" {
 		а) с использованием массива;
 		б) с использованием рекурсии.
 	 */
-
 	 /// Команда для задания №3
 	typedef enum
 	{
@@ -28,7 +30,7 @@ extern "C" {
 	/// Реализовать функцию перевода из 10 системы в двоичную используя рекурсию
 	/// \param input
 	/// \return представление числа в двоичной системе
-	int L2_exec_1(int input);
+	int L2_exec_1(uint8_t input);
 
 	/// Возведение в степень
 	/// \param a число
@@ -46,7 +48,7 @@ extern "C" {
 	/// \param input входное значение
 	/// \param cmd команда
 	/// \return результат выполнения команды
-	int L2_exec_3(int input, command cmd);
+	int L2_exec_3(int input, command cmd); // не выполнено
 
 #ifdef __cplusplus
 }

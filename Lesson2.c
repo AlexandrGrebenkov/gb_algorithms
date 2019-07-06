@@ -1,8 +1,6 @@
 #include "Lesson2.h"
 
-char str[20];
-
-int L2_exec_1(int input)
+int L2_exec_1(uint8_t input)
 {
 	if (input < 2)
 		return input;
