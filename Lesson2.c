@@ -37,3 +37,10 @@ int L2_exec_2c(int a, int b)
 		return tmp * tmp;
 	}
 }
+
+int L2_exec_3(int n, int target)
+{
+	if (n == target) return 1; // Получили нужное число
+	if (n > target) return  0; // Перебор
+	return L2_exec_3(n * 2, target) + L2_exec_3(n + 1, target); // Возможные операции
+}
