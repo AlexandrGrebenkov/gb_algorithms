@@ -28,8 +28,9 @@ extern "C" {
 	/// \param barriers список препятствий
 	/// \param barriersCount количество препятствий
 	/// \return количество маршрутов
-	int L4_ex_1(int kingPositionX, int kingPositionY, point target, point* barriers, int barriersCount);
+	int L4_ex_1(point kingPosition, point target, point* barriers, int barriersCount);
 
+	/// *** Требуется обойти конём шахматную доску
 	int L4_ex_2(int n);
 
 	/// Рекурсивный бинарный поиск

@@ -61,8 +61,12 @@ namespace
 		target.X = 4;
 		target.Y = 4;
 
+		point kingPos;
+		kingPos.X = 0;
+		kingPos.Y = 0;
+
 		point barriers[1];
-		int moves = L4_ex_1(0, 0, target, barriers, 0);
+		int moves = L4_ex_1(kingPos, target, barriers, 0);
 		ASSERT_EQ(70, moves);
 	}
 
@@ -72,11 +76,15 @@ namespace
 		target.X = 2;
 		target.Y = 1;
 
+		point kingPos;
+		kingPos.X = 0;
+		kingPos.Y = 0;
+
 		point barriers[1];
 		barriers[0].X = 0;
 		barriers[0].Y = 1;
 
-		int moves = L4_ex_1(0, 0, target, barriers, 1);
+		int moves = L4_ex_1(kingPos, target, barriers, 1);
 		ASSERT_EQ(2, moves);
 	}
 
@@ -86,6 +94,10 @@ namespace
 		point target;
 		target.X = 4;
 		target.Y = 4;
+
+		point kingPos;
+		kingPos.X = 0;
+		kingPos.Y = 0;
 
 		point barriers[3];
 		barriers[0].X = 1;
@@ -97,13 +109,16 @@ namespace
 		barriers[2].X = 3;
 		barriers[2].Y = 2;
 
-		int moves = L4_ex_1(0, 0, target, barriers, 3);
+		int moves = L4_ex_1(kingPos, target, barriers, 3);
 		ASSERT_EQ(10, moves);
 	}
 
 	//--------------Задача про коня------------------
+	/// Проверка заполнености доски
 	int CheckFillBoard();
+	/// Очистка доски
 	void ClearBoard();
+
 	TEST(Lesson4Tests, L4_ex_2_test)
 	{
 		ClearBoard();
@@ -121,6 +136,7 @@ namespace
 			}
 		return  1;
 	}
+
 	void ClearBoard()
 	{
 		for (int i = 0; i < COLS; ++i)
