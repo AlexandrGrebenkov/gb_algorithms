@@ -1,5 +1,5 @@
 #include "Lesson4.h"
-
+#include <stdlib.h>
 
 int BinarySearch(int* arr, int len, int v)
 {
@@ -49,7 +49,7 @@ point FindPoint(int n);
 
 int L4_ex_2(int n)
 {
-	if (n == ROWS * COLS + 1) return 1; // Прошли всё поле - выходим
+	if (n == ROWS * COLS) return 1; // Прошли всё поле - выходим
 	point current = FindPoint(n);
 	point* moves = GetAvailableMoves(current);
 	int moveCntr = 0;
@@ -62,15 +62,20 @@ int L4_ex_2(int n)
 		{
 			SetPoint(moves[moveCntr], n + 1);
 			if (L4_ex_2(n + 1))
-				return 1;
-			if (n == 1)
 			{
-				n = 1;
+				free(moves);
+				return 1;
+			}
+			if (n == 1|| n == 2)
+			{
+				n = n;
 			}
 			ResetPoint(moves[moveCntr]);
+			n = n;
 		}
 		moveCntr++;
 	}
+	free(moves);
 	return  0;
 }
 
@@ -111,6 +116,7 @@ void ResetPoint(point p)
 	ChessBoard[p.X][p.Y] = 0;
 }
 
+
 point availableMoves[9]; // доступные ходы для текущей позиции (8 возможных + 1 терминальная ячейка со значениями -1, -1)
 
 /// Функция возвращает возможные ходы коня для текущей позиции
@@ -121,6 +127,8 @@ point* GetAvailableMoves(point current)
 	int xFlip, yFlip;
 	int counter = 0;
 	int xPos, yPos;
+	point* arr = (point*)malloc(sizeof(point) * 9);
+	if (arr == NULL) return arr;
 	for (int i = 0; i < 4; i++)
 	{
 		xFlip = ((i >> 0) & 1) == 1 ? -1 : 1;
@@ -131,8 +139,8 @@ point* GetAvailableMoves(point current)
 		if ((xPos < COLS && yPos < ROWS) &&
 			(xPos >= 0 && yPos >= 0))
 		{
-			availableMoves[counter].X = xPos;
-			availableMoves[counter].Y = yPos;
+			arr[counter].X = xPos;
+			arr[counter].Y = yPos;
 			counter++;
 		}
 
@@ -141,14 +149,14 @@ point* GetAvailableMoves(point current)
 		if ((xPos < COLS && yPos < ROWS) &&
 			(xPos >= 0 && yPos >= 0))
 		{
-			availableMoves[counter].X = xPos;
-			availableMoves[counter].Y = yPos;
+			arr[counter].X = xPos;
+			arr[counter].Y = yPos;
 			counter++;
 		}
 	}
 
-	availableMoves[counter].X = -1;
-	availableMoves[counter].Y = -1;
-	return availableMoves;
+	arr[counter].X = -1;
+	arr[counter].Y = -1;
+	return arr;
 }
 
