@@ -3,10 +3,10 @@
 
 int BinarySearch(int* arr, int len, int v)
 {
-	if (len == 0) return -1; // «Ì‡˜ÂÌËÂ ÌÂ Ì‡È‰ÂÌÓ
-	int midIndex = len / 2 + len % 2; // »Ì‰ÂÍÒ ÒÂÂ‰ËÌ˚ Ï‡ÒÒË‚‡
-	int midValue = arr[midIndex]; // ÁÌ‡˜ÂÌËÂ ÒÂÂ‰ËÌ˚ Ï‡ÒÒË‚‡
-	if (v == midValue) // Õ‡¯ÎË ˜ËÒÎÓ ‚ ÒÂÂ‰ËÌÂ Ï‡ÒÒË‚‡
+	if (len == 0) return -1; // –ó–Ω–∞—á–µ–Ω–∏–µ –Ω–µ –Ω–∞–π–¥–µ–Ω–æ
+	int midIndex = len / 2 + len % 2; // –ò–Ω–¥–µ–∫—Å —Å–µ—Ä–µ–¥–∏–Ω—ã –º–∞—Å—Å–∏–≤–∞
+	int midValue = arr[midIndex]; // –∑–Ω–∞—á–µ–Ω–∏–µ —Å–µ—Ä–µ–¥–∏–Ω—ã –º–∞—Å—Å–∏–≤–∞
+	if (v == midValue) // –ù–∞—à–ª–∏ —á–∏—Å–ª–æ –≤ —Å–µ—Ä–µ–¥–∏–Ω–µ –º–∞—Å—Å–∏–≤–∞
 		return midIndex;
 	if (v > midValue)
 	{
@@ -17,4 +17,36 @@ int BinarySearch(int* arr, int len, int v)
 	{
 		return BinarySearch(arr, len / 2, v);
 	}
+}
+
+int L4_ex_1(int kingPositionX, int kingPositionY, point target, point* barriers, int barriersCount)
+{
+	if (kingPositionX > 8 ||
+		kingPositionY > 8)
+		return 0; // –í—ã—à–ª–∏ –∑–∞ –≥—Ä–∞–Ω–∏—Ü—ã –¥–æ—Å–∫–∏
+
+	if (kingPositionX == target.X &&
+		kingPositionY == target.Y)
+		return 1; // –ü—Ä–∏—à–ª–∏ –≤ –Ω—É–∂–Ω–æ–µ –º–µ—Å—Ç–æ
+
+    // –ü—Ä–æ–≤–µ—Ä—è–µ–º –ø—Ä–µ–ø—è—Ç—Å—Ç–≤–∏—è:
+    for (int i = 0; i < barriersCount; ++i)
+    {
+        if (kingPositionX == barriers[i].X &&
+            kingPositionY == barriers[i].Y)
+            return 0; // –ù–∞—Ç–∫–Ω—É–ª–∏—Å—å –Ω–∞ –ø—Ä–µ–ø—è—Ç—Å—Ç–≤–∏–µ
+    }
+
+	return L4_ex_1(kingPositionX + 1, kingPositionY, target, barriers, barriersCount) + L4_ex_1(kingPositionX, kingPositionY + 1, target, barriers, barriersCount);
+}
+
+
+
+void ClearBoard()
+{
+	for (int i = 0; i < 8; ++i)
+		for (int j = 0; j < 8; ++j)
+		{
+			ChessBoard[i][j] == 0;
+		}
 }
