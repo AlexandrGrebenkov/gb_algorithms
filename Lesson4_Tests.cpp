@@ -4,7 +4,7 @@
 namespace
 {
 	//------------Бинарный поиск---------------
-	TEST(Lesson3Tests, BinarySearch_Test1)
+	TEST(Lesson4Tests, BinarySearch_Test1)
 	{
 		int arr[] = { 0, 1, 54, 156, 234, 264, 346, 642,  643 };
 		int SIZE = sizeof(arr) / sizeof(int);
@@ -14,7 +14,7 @@ namespace
 		ASSERT_EQ(4, index);
 	}
 
-	TEST(Lesson3Tests, BinarySearch_Test2)
+	TEST(Lesson4Tests, BinarySearch_Test2)
 	{
 		int arr[] = { 0, 1, 54, 156, 234, 264, 346, 642,  643 };
 		int SIZE = sizeof(arr) / sizeof(int);
@@ -24,7 +24,7 @@ namespace
 		ASSERT_EQ(1, index);
 	}
 
-	TEST(Lesson3Tests, BinarySearch_Test3)
+	TEST(Lesson4Tests, BinarySearch_Test3)
 	{
 		int arr[] = { 0, 1, 54, 156, 234, 264, 346, 642,  643 };
 		int SIZE = sizeof(arr) / sizeof(int);
@@ -34,7 +34,7 @@ namespace
 		ASSERT_EQ(8, index);
 	}
 
-	TEST(Lesson3Tests, BinarySearchNotFound1_test)
+	TEST(Lesson4Tests, BinarySearchNotFound1_test)
 	{
 		int arr[] = { 0, 1, 54, 156, 234, 264, 346, 642,  643 };
 		int SIZE = sizeof(arr) / sizeof(int);
@@ -44,7 +44,7 @@ namespace
 		ASSERT_EQ(-1, index);
 	}
 
-	TEST(Lesson3Tests, BinarySearchNotFound2_test)
+	TEST(Lesson4Tests, BinarySearchNotFound2_test)
 	{
 		int arr[] = { 0, 1, 54, 156, 234, 264, 346, 642,  643 };
 		int SIZE = sizeof(arr) / sizeof(int);
@@ -55,10 +55,8 @@ namespace
 	}
 
 	//-------------Задача про короля----------------
-	TEST(Lesson3Tests, KingMovesWithoutBariers_test)
+	TEST(Lesson4Tests, KingMovesWithoutBariers_test)
 	{
-		ClearBoard();
-
 		point target;
 		target.X = 4;
 		target.Y = 4;
@@ -68,43 +66,67 @@ namespace
 		ASSERT_EQ(70, moves);
 	}
 
-    TEST(Lesson3Tests, KingMovesWithOneBariers_test)
-    {
-        ClearBoard();
+	TEST(Lesson4Tests, KingMovesWithOneBariers_test)
+	{
+		point target;
+		target.X = 2;
+		target.Y = 1;
 
-        point target;
-        target.X = 2;
-        target.Y = 1;
+		point barriers[1];
+		barriers[0].X = 0;
+		barriers[0].Y = 1;
 
-        point barriers[1];
-        barriers[0].X = 0;
-        barriers[0].Y = 1;
+		int moves = L4_ex_1(0, 0, target, barriers, 1);
+		ASSERT_EQ(2, moves);
+	}
 
-        int moves = L4_ex_1(0, 0, target, barriers, 1);
-        ASSERT_EQ(2, moves);
-    }
+	// Расстановка препятствий как в презентации
+	TEST(Lesson4Tests, KingMovesWithHWBariers_test)
+	{
+		point target;
+		target.X = 4;
+		target.Y = 4;
 
-    // Расстановка препятствий как в презентации
-    TEST(Lesson3Tests, KingMovesWithHWBariers_test)
-    {
-        ClearBoard();
+		point barriers[3];
+		barriers[0].X = 1;
+		barriers[0].Y = 1;
 
-        point target;
-        target.X = 4;
-        target.Y = 4;
+		barriers[1].X = 1;
+		barriers[1].Y = 3;
 
-        point barriers[3];
-        barriers[0].X = 1;
-        barriers[0].Y = 1;
+		barriers[2].X = 3;
+		barriers[2].Y = 2;
 
-        barriers[1].X = 1;
-        barriers[1].Y = 3;
+		int moves = L4_ex_1(0, 0, target, barriers, 3);
+		ASSERT_EQ(10, moves);
+	}
 
-        barriers[2].X = 3;
-        barriers[2].Y = 2;
+	//--------------Задача про коня------------------
+	int CheckFillBoard();
+	void ClearBoard();
+	TEST(Lesson4Tests, L4_ex_2_test)
+	{
+		ClearBoard();
+		L4_ex_2(1);
+		ASSERT_EQ(1, CheckFillBoard());
+	}
 
-        int moves = L4_ex_1(0, 0, target, barriers, 3);
-        ASSERT_EQ(10, moves);
-    }
-
+	int CheckFillBoard()
+	{
+		for (int i = 0; i < COLS; ++i)
+			for (int j = 0; j < ROWS; ++j)
+			{
+				if (ChessBoard[i][j] == 0)
+					return 0;
+			}
+		return  1;
+	}
+	void ClearBoard()
+	{
+		for (int i = 0; i < COLS; ++i)
+			for (int j = 0; j < ROWS; ++j)
+			{
+				ChessBoard[i][j] = 0;
+			}
+	}
 }
